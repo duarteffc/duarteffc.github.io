@@ -39,7 +39,14 @@
         });
 
         // Run the function when the page loads
-        window.onload = displayTextFromCookie;
+        window.onload = function () {
+            if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
+                document.getElementById('textDisplay').textContent = "Page was refreshed!";
+                // Add your refresh-specific logic here
+            } else {
+                console.log("Page loaded normally.");
+            }
+        };
     </script>
 </head>
 <body>
