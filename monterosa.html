@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cookie-Based Text</title>
+    <script>
+        // Set a cookie
+        document.cookie = "theToken=NEW_JWT_TOKEN_HERE; path=/; expires=Fri, 31 Dec 2025 23:59:59 GMT";
+        // Function to get the value of a cookie by name
+        function getCookie(name) {
+            const cookies = document.cookie.split('; ');
+            for (let i = 0; i < cookies.length; i++) {
+                const [key, value] = cookies[i].split('=');
+                if (key === name) {
+                    return decodeURIComponent(value);
+                }
+            }
+            return null;
+        }
+
+        // Function to display text based on the cookie
+        function displayTextFromCookie() {
+            const text = getCookie('theToken');
+            const displayElement = document.getElementById('textDisplay');
+            if (text) {
+                displayElement.textContent = text;
+            } else {
+                displayElement.textContent = document.cookie;
+            }
+        }
+
+        // Run the function when the page loads
+        window.onload = displayTextFromCookie;
+    </script>
+</head>
+<body>
+    <h1>Cookie-Based Text Display</h1>
+    <p id="textDisplay">Loading...</p>
+</body>
+</html>
