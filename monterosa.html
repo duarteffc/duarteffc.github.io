@@ -29,11 +29,7 @@
         }
 
         window.addEventListener("message", function(event) {
-            if (event.data.type === "theToken") {
-                const token = event.data.token;
-                displayTextFromCookie;
-                console.log("Token received:", token);
-            }
+            displayTextFromCookie;
         });
 
         // Run the function when the page loads
