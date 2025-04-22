@@ -29,7 +29,13 @@
         }
 
         window.addEventListener("message", function(event) {
-            displayTextFromCookie;
+            const text = getCookie('theToken');
+            const displayElement = document.getElementById('textDisplay');
+            if (text) {
+                displayElement.textContent = text;
+            } else {
+                displayElement.textContent = document.cookie;
+            }
         });
 
         // Run the function when the page loads
