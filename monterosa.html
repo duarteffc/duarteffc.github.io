@@ -28,6 +28,15 @@
             }
         }
 
+        // Function to send a post message "tokenExpired"
+        function sendTokenExpiredMessage() {
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.tokenExpired) {
+                window.webkit.messageHandlers.tokenExpired.postMessage(null);
+            } else {
+                console.error("The message handler 'tokenExpired' is not available.");
+            }
+        }
+
         window.addEventListener("message", function(event) {
             const text = getCookie('theToken');
             const displayElement = document.getElementById('textDisplay');
@@ -47,15 +56,6 @@
                 console.log("Page loaded normally.");
             }
         };
-
-        // Function to send a post message "tokenExpired"
-        function sendTokenExpiredMessage() {
-            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.tokenExpired) {
-                window.webkit.messageHandlers.tokenExpired.postMessage(null);
-            } else {
-                console.error("The message handler 'tokenExpired' is not available.");
-            }
-        }
     </script>
 </head>
 <body>
