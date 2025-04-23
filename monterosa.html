@@ -47,10 +47,16 @@
                 console.log("Page loaded normally.");
             }
         };
+
+        // Function to send a post message "tokenExpired"
+        function sendTokenExpiredMessage() {
+            window.postMessage("tokenExpired", "*");
+        }
     </script>
 </head>
 <body>
     <h1>Cookie-Based Text Display</h1>
     <p id="textDisplay">Loading...</p>
+    <button onclick="sendTokenExpiredMessage()">Send Token Expired</button>
 </body>
 </html>
