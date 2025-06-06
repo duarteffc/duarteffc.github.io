@@ -54,7 +54,7 @@
         function displayTextFromCookie() {
             const text = getCookie('theToken');
             const displayElement = document.getElementById('textDisplay');
-            if (window.parent) {
+            if (window.tokenExpired) {
                 const displayElement = document.getElementById('parentDisplay');
                 displayElement.textContent = "Parent bro window is available.";
             }
@@ -67,8 +67,8 @@
 
         // Function to send a post message "tokenExpired"
         function sendTokenExpiredMessage() {
-            if (window.parent) {
-                window.parent.postMessage({ type: "token-expired" }, "*");
+            if (window.tokenExpired) {
+                window.tokenExpired.postMessage({ type: "token-expired" }, "*");
             }
 
             if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.tokenExpired) {
