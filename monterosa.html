@@ -68,7 +68,7 @@
         // Function to send a post message "tokenExpired"
         function sendTokenExpiredMessage() {
             if (window.tokenExpired) {
-                window.tokenExpired.postMessage({ type: "token-expired" }, "*");
+                window.tokenExpired.postMessage(JSON.stringify({ type: "token-expired" }));
             }
 
             if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.tokenExpired) {
