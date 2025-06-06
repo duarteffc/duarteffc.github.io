@@ -54,6 +54,10 @@
         function displayTextFromCookie() {
             const text = getCookie('theToken');
             const displayElement = document.getElementById('textDisplay');
+            if (window.parent) {
+                const displayElement = document.getElementById('parentDisplay');
+                displayElement.textContent = "Parent bro window is available.";
+            }
             if (text) {
                 displayElement.textContent = text;
             } else {
@@ -98,6 +102,7 @@
 <body>
     <h1>Cookie-Based Text Display</h1>
     <p id="textDisplay">Loading...</p>
+    <p id="parentDisplay">No parent bro</p>
     <button onclick="sendTokenExpiredMessage()">Send Token Expired</button>
     <button onclick="displayTextFromCookie()">Read Cookie</button>
 </body>
