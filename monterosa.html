@@ -60,8 +60,8 @@
             const text = getCookie('theToken');
             const displayElement = document.getElementById('textDisplay');
             if (window.monterosaMessage) {
-                const displayElement = document.getElementById('parentDisplay');
-                displayElement.textContent = "Parent bro window is available.";
+                const parentDisplayElement = document.getElementById('parentDisplay');
+                parentDisplayElement.textContent = "Parent bro window is available.";
             }
             if (text) {
                 displayElement.textContent = text;
@@ -87,6 +87,62 @@
                 window.webkit.messageHandlers.monterosaMessage.postMessage(null);
             } else {
                 console.error("The message handler 'monterosaMessage' is not available.");
+            }
+        }
+
+        // New event: Backend error
+        function sendBackendError() {
+            if (window.monterosaMessage) {
+                window.monterosaMessage.postMessage(JSON.stringify({
+                    action: "Application Error",
+                    identifier: "application-error",
+                    payload: {
+                        reason: "backend-error",
+                        message: "Application failed to fetch cards from backend"
+                    }
+                }));
+            }
+        }
+
+        // New event: Logic error
+        function sendLogicError() {
+            if (window.monterosaMessage) {
+                window.monterosaMessage.postMessage(JSON.stringify({
+                    action: "Application Error",
+                    identifier: "application-error",
+                    payload: {
+                        reason: "logic-error",
+                        message: "Application encountered an error whilst selecting a card"
+                    }
+                }));
+            }
+        }
+
+        // New event: UI error
+        function sendUiError() {
+            if (window.monterosaMessage) {
+                window.monterosaMessage.postMessage(JSON.stringify({
+                    action: "Application Error",
+                    identifier: "application-error",
+                    payload: {
+                        reason: "ui-error",
+                        message: "No cards to show"
+                    }
+                }));
+            }
+        }
+
+        // New event: Experience status
+        function sendExperienceStatus() {
+            if (window.monterosaMessage) {
+                window.monterosaMessage.postMessage(JSON.stringify({
+                    action: "Application Status Report",
+                    identifier: "application-status",
+                    payload: {
+                        reason: "event-not-started",
+                        message: "Event status error i.e event not started"
+                    }
+                }));
             }
         }
 
@@ -118,6 +174,11 @@
     <p id="parentDisplay">No parent bro</p>
     <button onclick="sendMonterosaMessage()">Send Token Expired</button>
     <button onclick="displayTextFromCookie()">Read Cookie</button>
+    <!-- New buttons for events -->
+    <button onclick="sendBackendError()">Send Backend Error</button>
+    <button onclick="sendLogicError()">Send Logic Error</button>
+    <button onclick="sendUiError()">Send UI Error</button>
+    <button onclick="sendExperienceStatus()">Send Experience Status</button>
 </body>
 
 </html>
