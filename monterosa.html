@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cookie-Based Text</title>
     <style>
-        html, body {
+        html,
+        body {
             margin: 0;
             height: 100%;
         }
@@ -13,12 +15,15 @@
         body {
             font-family: Arial, sans-serif;
             background: linear-gradient(#202020, #000000);
-            background-attachment: fixed; /* Ensures the gradient doesn't scroll */
+            background-attachment: fixed;
+            /* Ensures the gradient doesn't scroll */
             color: white;
-            min-height: 100vh; /* Ensures the gradient covers the full viewport height */
+            min-height: 100vh;
+            /* Ensures the gradient covers the full viewport height */
         }
 
-        h1, p {
+        h1,
+        p {
             text-align: center;
         }
 
@@ -54,7 +59,7 @@
         function displayTextFromCookie() {
             const text = getCookie('theToken');
             const displayElement = document.getElementById('textDisplay');
-            if (window.tokenExpired) {
+            if (window.monterosaMessage) {
                 const displayElement = document.getElementById('parentDisplay');
                 displayElement.textContent = "Parent bro window is available.";
             }
@@ -65,20 +70,27 @@
             }
         }
 
-        // Function to send a post message "tokenExpired"
-        function sendTokenExpiredMessage() {
-            if (window.tokenExpired) {
-                window.tokenExpired.postMessage(JSON.stringify({ type: "token-expired" }));
+        // Function to send a post message "monterosaMessage"
+        function sendMonterosaMessage() {
+            if (window.monterosaMessage) {
+                window.monterosaMessage.postMessage(JSON.stringify({
+                    action: "User Auth Token Refresh",
+                    identifier: "token-refresh",
+                    payload: {
+                        reason: "token-expired",
+                        message: "User login token expired"
+                    }
+                }));
             }
 
-            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.tokenExpired) {
-                window.webkit.messageHandlers.tokenExpired.postMessage(null);
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.monterosaMessage) {
+                window.webkit.messageHandlers.monterosaMessage.postMessage(null);
             } else {
-                console.error("The message handler 'tokenExpired' is not available.");
+                console.error("The message handler 'monterosaMessage' is not available.");
             }
         }
 
-        window.addEventListener("message", function(event) {
+        window.addEventListener("message", function (event) {
             const text = getCookie('theToken');
             const displayElement = document.getElementById('textDisplay');
             if (text) {
@@ -99,11 +111,13 @@
         };
     </script>
 </head>
+
 <body>
     <h1>Cookie-Based Text Display</h1>
     <p id="textDisplay">Loading...</p>
     <p id="parentDisplay">No parent bro</p>
-    <button onclick="sendTokenExpiredMessage()">Send Token Expired</button>
+    <button onclick="sendMonterosaMessage()">Send Token Expired</button>
     <button onclick="displayTextFromCookie()">Read Cookie</button>
 </body>
+
 </html>
