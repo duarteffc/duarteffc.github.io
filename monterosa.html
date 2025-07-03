@@ -72,77 +72,93 @@
 
         // Function to send a post message "monterosaMessage"
         function sendMonterosaMessage() {
+            const msg = {
+                action: "User Auth Token Refresh",
+                identifier: "token-refresh",
+                payload: {
+                    reason: "token-expired",
+                    message: "User login token expired"
+                }
+            };
             if (window.monterosaMessage) {
-                window.monterosaMessage.postMessage(JSON.stringify({
-                    action: "User Auth Token Refresh",
-                    identifier: "token-refresh",
-                    payload: {
-                        reason: "token-expired",
-                        message: "User login token expired"
-                    }
-                }));
+                window.monterosaMessage.postMessage(JSON.stringify(msg));
             }
-
             if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.monterosaMessage) {
-                window.webkit.messageHandlers.monterosaMessage.postMessage(null);
-            } else {
+                window.webkit.messageHandlers.monterosaMessage.postMessage(JSON.stringify(msg));
+            } else if (!(window.monterosaMessage)) {
                 console.error("The message handler 'monterosaMessage' is not available.");
             }
         }
 
         // New event: Backend error
         function sendBackendError() {
+            const msg = {
+                action: "Application Error",
+                identifier: "application-error",
+                payload: {
+                    reason: "backend-error",
+                    message: "Application failed to fetch cards from backend"
+                }
+            };
             if (window.monterosaMessage) {
-                window.monterosaMessage.postMessage(JSON.stringify({
-                    action: "Application Error",
-                    identifier: "application-error",
-                    payload: {
-                        reason: "backend-error",
-                        message: "Application failed to fetch cards from backend"
-                    }
-                }));
+                window.monterosaMessage.postMessage(JSON.stringify(msg));
+            }
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.monterosaMessage) {
+                window.webkit.messageHandlers.monterosaMessage.postMessage(JSON.stringify(msg));
             }
         }
 
         // New event: Logic error
         function sendLogicError() {
+            const msg = {
+                action: "Application Error",
+                identifier: "application-error",
+                payload: {
+                    reason: "logic-error",
+                    message: "Application encountered an error whilst selecting a card"
+                }
+            };
             if (window.monterosaMessage) {
-                window.monterosaMessage.postMessage(JSON.stringify({
-                    action: "Application Error",
-                    identifier: "application-error",
-                    payload: {
-                        reason: "logic-error",
-                        message: "Application encountered an error whilst selecting a card"
-                    }
-                }));
+                window.monterosaMessage.postMessage(JSON.stringify(msg));
+            }
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.monterosaMessage) {
+                window.webkit.messageHandlers.monterosaMessage.postMessage(JSON.stringify(msg));
             }
         }
 
         // New event: UI error
         function sendUiError() {
+            const msg = {
+                action: "Application Error",
+                identifier: "application-error",
+                payload: {
+                    reason: "ui-error",
+                    message: "No cards to show"
+                }
+            };
             if (window.monterosaMessage) {
-                window.monterosaMessage.postMessage(JSON.stringify({
-                    action: "Application Error",
-                    identifier: "application-error",
-                    payload: {
-                        reason: "ui-error",
-                        message: "No cards to show"
-                    }
-                }));
+                window.monterosaMessage.postMessage(JSON.stringify(msg));
+            }
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.monterosaMessage) {
+                window.webkit.messageHandlers.monterosaMessage.postMessage(JSON.stringify(msg));
             }
         }
 
         // New event: Experience status
         function sendExperienceStatus() {
+            const msg = {
+                action: "Application Status Report",
+                identifier: "application-status",
+                payload: {
+                    reason: "event-not-started",
+                    message: "Event status error i.e event not started"
+                }
+            };
             if (window.monterosaMessage) {
-                window.monterosaMessage.postMessage(JSON.stringify({
-                    action: "Application Status Report",
-                    identifier: "application-status",
-                    payload: {
-                        reason: "event-not-started",
-                        message: "Event status error i.e event not started"
-                    }
-                }));
+                window.monterosaMessage.postMessage(JSON.stringify(msg));
+            }
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.monterosaMessage) {
+                window.webkit.messageHandlers.monterosaMessage.postMessage(JSON.stringify(msg));
             }
         }
 
