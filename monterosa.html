@@ -80,10 +80,10 @@
                     message: "User login token expired"
                 }
             };
-            if (window.monterosaMessage) {
+            if (window.monterosaMessage && window.monterosaMessage.postMessage) {
                 window.monterosaMessage.postMessage(JSON.stringify(msg));
             }
-            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.monterosaMessage) {
+            if (window.webkit && window.webkit.messageHandlers && window.webkit.messageHandlers.monterosaMessage && window.webkit.messageHandlers.monterosaMessage.postMessage) {
                 window.webkit.messageHandlers.monterosaMessage.postMessage(JSON.stringify(msg));
             } else if (!(window.monterosaMessage)) {
                 console.error("The message handler 'monterosaMessage' is not available.");
